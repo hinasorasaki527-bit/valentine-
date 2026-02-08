@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Louise 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #f7e7e1, #fbeeee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 40px 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      animation: cardSlide 1s ease forwards;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: #3b2f2f;
+    }
+
+    p {
+      font-size: 16px;
+      color: #5f4a4a;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #e8b4b8;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      background: #de9aa0;
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #e8b4b8;
+    }
+
+    .pulse {
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    .heart {
+      position: absolute;
+      color: #e8b4b8;
+      font-size: 24px;
+      animation: float 5s linear infinite;
+    }
+
+    /* Animated photos */
+    .card-photo {
+      width: 90%;
+      max-width: 280px; /* slightly smaller */
+      border-radius: 15px;
+      margin: 15px 0;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: photoFadeIn 1s forwards;
+    }
+
+    @keyframes photoFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    @keyframes cardSlide {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1 class="fade-in">&#10084; Louise &#10084;</h1>
+    <p class="fade-in">For the girl who makes me smile and be thankful for my life every day…</p>
+    <button onclick="nextPage()" class="pulse" style="opacity:1;">Next &#10084;</button>
+  </div>
+
+  <script>
+    function initHearts(count = 10) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "&#10084;";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
+        heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }
+    }
+
+    setInterval(() => initHearts(5), 1000);
+
+    function nextPage() {
+      const card = document.getElementById("card");
+      card.innerHTML = `
+        <h1 class="fade-in">&#10084; Louise &#10084;</h1>
+        <img src="Louise1.jpg" alt="Cute photo 1" class="card-photo">
+        <p class="fade-in">Will you be my Valentine?</p>
+        <button onclick="sayYes()" class="pulse" style="opacity:1;">Yes, of course &#10084;</button>
+      `;
+    }
+
+    function sayYes() {
+      const card = document.getElementById("card");
+      card.innerHTML = `
+        <h1 class="fade-in">YAYYY!!!! &#10084;</h1>
+        <img src="Louise2.jpg" alt="Cute photo 2" class="card-photo">
+        <p class="fade-in">I can't wait to spend Valentine's Day with you MY LOVEEEEE &#10084;&#10084;</p>
+        <p class="fade-in">Thank you FOR BEING MY FUTURE WIFEYYY &#10084;</p>
+        <p class="fade-in" style="font-size:22px;">&#10084; &#10084; &#10084;</p>
+      `;
+      createHearts(30);
+    }
+
+    function createHearts(count = 30) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "&#10084;";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }
+    }
+  </script>
+
+</body>
+</html>
