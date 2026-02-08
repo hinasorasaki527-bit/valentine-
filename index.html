@@ -60,11 +60,21 @@
     }
 
     .heart {
-      position: absolute;
-      color: #e8b4b8;
-      font-size: 18px;
-      animation: float 6s linear infinite;
+  position: absolute;
+  color: #e8b4b8;
+  font-size: 24px; /* bigger hearts */
+  animation: float 5s linear infinite; /* faster floating */
     }
+    
+    .fade-in {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
 
     @keyframes float {
       from {
