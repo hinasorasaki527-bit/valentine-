@@ -23,7 +23,7 @@
       text-align: center;
       max-width: 420px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      animation: fadeIn 1.5s ease;
+      animation: cardSlide 1.5s ease forwards;
     }
 
     h1 {
@@ -47,78 +47,72 @@
       border-radius: 30px;
       font-size: 16px;
       cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
     }
 
     button:hover {
       background: #de9aa0;
-      transform: scale(1.05);
-    }
-
-    .hidden {
-      display: none;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #e8b4b8;
     }
 
     .heart {
-  position: absolute;
-  color: #e8b4b8;
-  font-size: 24px; /* bigger hearts */
-  animation: float 5s linear infinite; /* faster floating */
+      position: absolute;
+      color: #e8b4b8;
+      font-size: 24px;
+      animation: float 5s linear infinite;
     }
-    
+
+    /* Fade-in class */
     .fade-in {
-  opacity: 0;
-  animation: fadeIn 2s forwards;
-}
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+    }
 
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-
+    /* Animations */
     @keyframes float {
-      from {
-        transform: translateY(100vh);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-10vh);
-        opacity: 0;
-      }
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    @keyframes cardSlide {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
   </style>
 </head>
 <body>
 
   <div class="card" id="card">
-    <h1>♡Louise♡  </h1>
-    <p>For the girl who makes me smile and be thankful of my life everyday…</p>
-    <h1>Will you be my Valentine?</h1>
-    <button onclick="sayYes()">Yes, of course♡ </button>
+    <h1 class="fade-in">&#10084; Louise &#10084;</h1>
+    <p class="fade-in">For the girl who makes me smile and be thankful for my life every day…</p>
+    <h1 class="fade-in">Will you be my Valentine?</h1>
+    <button onclick="sayYes()">Yes, of course &#10084;</button>
   </div>
 
   <script>
     function sayYes() {
-  const card = document.getElementById("card");
-  card.innerHTML = `
-    <h1>Yay &#10084;</h1>
-    <p>I can't wait to spend Valentine's Day with you, Louise &#10084;&#10084;</p>
-    <p>Thank you for being you &#10084;</p>
-    <p style="font-size:22px;">&#10084; &#10084; &#10084;</p>
-  `;
-  createHearts();
-}
+      const card = document.getElementById("card");
+      card.innerHTML = `
+        <h1 class="fade-in">Yay &#10084;</h1>
+        <p class="fade-in">I can't wait to spend Valentine's Day with you, Louise &#10084;&#10084;</p>
+        <p class="fade-in">Thank you for being you &#10084;</p>
+        <p class="fade-in" style="font-size:22px;">&#10084; &#10084; &#10084;</p>
+      `;
+      createHearts();
+    }
 
     function createHearts() {
       for (let i = 0; i < 30; i++) {
         const heart = document.createElement("div");
         heart.className = "heart";
-        heart.innerHTML = "&hearts;";
+        heart.innerHTML = "&#10084;";
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.animationDuration = 3 + Math.random() * 3 + "s";
         document.body.appendChild(heart);
