@@ -97,4 +97,75 @@
       100% { transform: scale(1.1); }
     }
 
-    @keyfr
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1 class="fade-in">&#10084; Louise &#10084;</h1>
+    <p class="fade-in">For the girl who makes me smile and be thankful for my life every day…</p>
+    <button onclick="nextPage()" class="pulse" style="opacity:1;">Next &#10084;</button>
+  </div>
+
+  <script>
+    function initHearts(count = 10) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "&#10084;";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
+        heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }
+    }
+
+    setInterval(() => initHearts(5), 1000);
+
+    function nextPage() {
+      const card = document.getElementById("card");
+      card.innerHTML = `
+        <h1 class="fade-in">&#10084; Louise &#10084;</h1>
+        <img src="Louise1.jpg" alt="Cute photo 1" class="card-photo">
+        <p class="fade-in">Will you be my Valentine?</p>
+        <button onclick="sayYes()" class="pulse" style="opacity:1;">Yes, of course &#10084;</button>
+      `;
+    }
+
+    function sayYes() {
+      const card = document.getElementById("card");
+      card.innerHTML = `
+        <h1 class="fade-in">YAYYY!!!! &#10084;</h1>
+        <img src="Louise2.jpg" alt="Cute photo 2" class="card-photo">
+        <p class="fade-in">I can't wait to spend Valentine's Day with you MY LOVEEEEE &#10084;&#10084;</p>
+        <p class="fade-in">Thank you FOR BEING MY FUTURE WIFEYYY &#10084;</p>
+        <p class="fade-in" style="font-size:22px;">&#10084; &#10084; &#10084;</p>
+      `;
+      createHearts(30);
+    }
+
+    function createHearts(count = 30) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "&#10084;";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }
+    }
+  </script>
+
+</body>
+</html>
