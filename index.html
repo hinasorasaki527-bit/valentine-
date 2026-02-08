@@ -23,7 +23,7 @@
       text-align: center;
       max-width: 420px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      animation: cardSlide 1.5s ease forwards;
+      animation: cardSlide 1s ease forwards;
     }
 
     h1 {
@@ -48,15 +48,19 @@
       font-size: 16px;
       cursor: pointer;
       transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
-      opacity: 0; /* start hidden for fade-in */
-      animation: fadeIn 2s forwards; /* fade in */
-      animation-delay: 0.5s; /* slightly after text */
+      opacity: 0; /* fade-in start */
+      animation: fadeIn 1s forwards;
+      animation-delay: 0.5s;
     }
 
     button:hover {
       background: #de9aa0;
       transform: scale(1.1);
       box-shadow: 0 0 20px #e8b4b8;
+    }
+
+    .pulse {
+      animation: pulse 1.5s infinite alternate;
     }
 
     .heart {
@@ -68,7 +72,7 @@
 
     .fade-in {
       opacity: 0;
-      animation: fadeIn 2s forwards;
+      animation: fadeIn 1s forwards;
     }
 
     @keyframes float {
@@ -86,6 +90,11 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
   </style>
 </head>
 <body>
@@ -93,24 +102,37 @@
   <div class="card" id="card">
     <h1 class="fade-in">&#10084; Louise &#10084;</h1>
     <p class="fade-in">For the girl who makes me smile and be thankful for my life every day…</p>
-    <button onclick="nextPage()">Next &#10084;</button>
+    <button onclick="nextPage()" class="pulse">Next &#10084;</button>
   </div>
 
   <script>
     let page = 1;
 
+    // Start soft floating hearts in the background
+    function initHearts(count = 10) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "&#10084;";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
+        heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }
+    }
+
+    // Start initial hearts
+    setInterval(() => initHearts(5), 1000);
+
     function nextPage() {
       const card = document.getElementById("card");
-
-      if (page === 1) {
-        // Page 2 content
-        card.innerHTML = `
-          <h1 class="fade-in">&#10084; Louise &#10084;</h1>
-          <p class="fade-in">Will you be my Valentine?</p>
-          <button onclick="sayYes()">Yes, of course &#10084;</button>
-        `;
-        page++;
-      }
+      card.innerHTML = `
+        <h1 class="fade-in">&#10084; Louise &#10084;</h1>
+        <p class="fade-in">Will you be my Valentine?</p>
+        <button onclick="sayYes()" class="pulse">Yes, of course &#10084;</button>
+      `;
+      page++;
     }
 
     function sayYes() {
@@ -121,21 +143,18 @@
         <p class="fade-in">Thank you FOR BEING MY FUTURE WIFEYYY &#10084;</p>
         <p class="fade-in" style="font-size:22px;">&#10084; &#10084; &#10084;</p>
       `;
-      createHearts();
+      createHearts(30); // lots of hearts on celebration
     }
 
-    function createHearts() {
-      for (let i = 0; i < 30; i++) {
+    function createHearts(count = 30) {
+      for (let i = 0; i < count; i++) {
         const heart = document.createElement("div");
         heart.className = "heart";
         heart.innerHTML = "&#10084;";
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.animationDuration = 3 + Math.random() * 3 + "s";
         document.body.appendChild(heart);
-
-        setTimeout(() => {
-          heart.remove();
-        }, 6000);
+        setTimeout(() => heart.remove(), 6000);
       }
     }
   </script>
